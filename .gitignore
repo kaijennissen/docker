@@ -1,0 +1,10 @@
+# Mac Files
+*.DS_Store
+
+# Target Files
+*.tar
+*.tar.gz
+
+# data folders
+data_science_proxy/jupyter/data/
+data_science_proxy/rstudio/data/

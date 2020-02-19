@@ -1,0 +1,49 @@
+proxy:
+  title: Data Science Platform
+  port: 8080
+  authentication: simple
+  admin-groups: admins
+  users:
+  - name: Admin
+    password: password
+    groups: admins
+  - name: Test_User
+    password: password
+    groups: users
+  docker:
+      internal-networking: true
+  specs:
+  - id: RStudio
+    display-name: RStudio Server
+    description: Start RStudio Server Instance
+    container-image: rstudio:3.6.1-noauth
+    container-volumes: ["/Users/kaijennissen/Projekte/2019/05_DEKA/DEKA_ML/04_docker/intern-registry-images/data_science_proxy/rstudio/data/#{proxy.userId}:/home/#{proxy.userId}"]
+    container-network: data-science-net
+    access-groups: [users, admins]
+    container-env:
+      DISABLE_AUTH: true
+      USER: "#{proxy.userId}"
+    port: 8787
+  # - id: Jupyter
+  #   display-name: Jupyter Notebook
+  #   description: Start Jupyter Notebook Instance
+  #   container-cmd: ["start.sh", "jupyter", "notebook", "--NotebookApp.token=''", "--NotebookApp.ip='0.0.0.0'", "--NotebookApp.allow_origin='same'", "--NotebookApp.base_url='/app/Jupyter'", "--SingleUserNotebookApp.default_url='/tree'"] # , "--NotebookApp.base_urlUnicode=''", "--NotebookApp.default_urlUnicode='tree'"
+  #   container-volumes: [ "/Users/stephanemmer/Projekte/2019/intern-registry-images/data_science_proxy/jupyter/data/#{proxy.UserId}:/home/#{proxy.UserId}" ]
+  #   container-image: jupyter/base-notebook:notebook-6.0.3
+  #   container-network: data-science-net
+  #   access-groups: [users, admins]
+  #   container-env:
+  #     USER: root
+  #     NB_USER: '#{proxy.UserId}'
+  #     NB_UID: 1010
+  #     NB_GID: 1020
+  #     CHOWN_HOME: 'yes'
+  #     CHOWN_HOME_OPTS: -R
+  #   port: 8888
+
+logging:
+  level:
+    root: DEBUG
+
+server:
+  useForwardHeaders: true
