@@ -6,5 +6,5 @@
 *.tar.gz
 
 # data folders
-data_science_proxy/jupyter/data/
-data_science_proxy/rstudio/data/
+jupyter/data/
+rstudio/data/
