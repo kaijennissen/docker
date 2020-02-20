@@ -6,4 +6,4 @@ c.Spawner.debug = True
 
 # Administrators - set of users who can administer the Hub itself
 c.Authenticator.admin_users = {'admin'}
-#c.Authenticator.whitelist={'Germany', 'user1', 'user2', 'user3', 'ubuntu', "Vietnam"}
+#c.Authenticator.whitelist={'user1', 'user2', 'user3'}
