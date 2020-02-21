@@ -1,4 +1,4 @@
-IMAGE = data_science_proxy:2.3.0
+IMAGE = statworx/deka_data_science_portal:shinyproxy
 CONTAINER = ds_proxy_rstudio
 NETWORK = data-science-net
 

@@ -1,4 +1,4 @@
-IMAGE = mlflow_api:0.1.0
+IMAGE = statworx/deka_data_science_portal:mlflow
 CONTAINER = ds_api_mlflow
 NETWORK = data-science-net
 

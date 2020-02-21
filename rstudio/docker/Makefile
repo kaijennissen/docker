@@ -1,4 +1,4 @@
-IMAGE = rstudio:3.6.1-noauth
+IMAGE = statworx/deka_data_science_portal:rstudio
 CONTAINER = ds_app_rstudio
 NETWORK = data-science-net
 

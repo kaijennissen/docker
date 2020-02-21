@@ -1,4 +1,4 @@
-IMAGE = jupyterhub_proxy:0.1.0
+IMAGE = statworx/deka_data_science_portal:jupyterhub
 CONTAINER = ds_proxy_jupyter
 NETWORK = data-science-net
 

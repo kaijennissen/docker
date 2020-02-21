@@ -16,8 +16,8 @@ proxy:
   - id: RStudio
     display-name: RStudio Server
     description: Start RStudio Server Instance
-    container-image: rstudio:3.6.1-noauth
-    container-volumes: ["/Users/kaijennissen/Projekte/2019/05_DEKA/DEKA_ML/04_docker/intern-registry-images/data_science_proxy/rstudio/data/#{proxy.userId}:/home/#{proxy.userId}"]
+    container-image: statworx/deka_data_science_portal:rstudio
+    container-volumes: ["/Users/kaijennissen/Intern/05_Projekte/docker/rstudio/data/#{proxy.userId}:/home/#{proxy.userId}"]
     container-network: data-science-net
     access-groups: [users, admins]
     container-env:

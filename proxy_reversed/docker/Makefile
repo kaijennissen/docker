@@ -1,4 +1,4 @@
-IMAGE = nginx:1.17.5
+IMAGE = statworx/deka_data_science_portal:nginx
 CONTAINER = ds_proxy_reversed
 NETWORK = data-science-net
 
