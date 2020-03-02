@@ -15,29 +15,29 @@ THIS_FILE := $(realpath $(lastword $(MAKEFILE_LIST)))
 THIS_FILE_DIR := $(shell dirname $(THIS_FILE))
 
 check:
-	docker-check image ${IMAGE}
-	docker-check network ${NETWORK}
+	sudo docker-check image ${IMAGE}
+	sudo docker-check network ${NETWORK}
 
 build:
-	DOCKER_BUILDKIT=1 docker build -f $(THIS_FILE_DIR)/Dockerfile \
+	DOCKER_BUILDKIT=1 sudo docker build -f $(THIS_FILE_DIR)/Dockerfile \
 		-t $(IMAGE) \
 		$(THIS_FILE_DIR)/../source
 
 pull:
-	docker pull statworx/deka_data_science_portal:jupyterhub
+	sudo docker pull statworx/deka_data_science_portal:jupyterhub
 
 run_setup:
-	docker run -d \
+	sudo docker run -d \
 	    --name $(CONTAINER) \
 		--net ${NETWORK} \
 	    $(IMAGE)
 	mkdir -p $(THIS_FILE_DIR)/../data/conda/envs
-	docker cp $(CONTAINER):/opt/conda/envs/. $(THIS_FILE_DIR)/../data/conda/envs
-	docker stop $(CONTAINER)
-	docker rm $(CONTAINER)
+	sudo docker cp $(CONTAINER):/opt/conda/envs/. $(THIS_FILE_DIR)/../data/conda/envs
+	sudo docker stop $(CONTAINER)
+	sudo docker rm $(CONTAINER)
 
 run:
-	docker run -d \
+	sudo docker run -d \
 		--restart=unless-stopped \
 	    --name $(CONTAINER) \
 		--net ${NETWORK} \
@@ -53,18 +53,18 @@ run:
 	    $(IMAGE)
 
 stop:
-	docker stop ${CONTAINER}
+	sudo docker stop ${CONTAINER}
 
 rm: stop
-	docker rm ${CONTAINER}
+	sudo docker rm ${CONTAINER}
 
 package:
-	docker save -o $(THIS_FILE_DIR)/../target/$(TAR) $(IMAGE)
+	sudo docker save -o $(THIS_FILE_DIR)/../target/$(TAR) $(IMAGE)
 	cd $(THIS_FILE_DIR)/.. && tar cfz target/$(PACKAGE) target/$(TAR) docker/Makefile  
 	rm $(THIS_FILE_DIR)/../target/$(TAR)
 
 load:
-	docker load -i $(THIS_FILE_DIR)/../target/$(TAR)
+	sudo docker load -i $(THIS_FILE_DIR)/../target/$(TAR)
 
 help:
 	$(info Use `make check` to check if environment is ready)

@@ -15,14 +15,14 @@ THIS_FILE := $(realpath $(lastword $(MAKEFILE_LIST)))
 THIS_FILE_DIR := $(shell dirname $(THIS_FILE))
 
 check:
-	docker-check image ${IMAGE}
-	docker-check network ${NETWORK}
+	sudo docker-check image ${IMAGE}
+	sudo docker-check network ${NETWORK}
 
 pull:
-	docker pull statworx/deka_data_science_portal:nginx
+	sudo docker pull statworx/deka_data_science_portal:nginx
 
 run:
-	docker run -d \
+	sudo docker run -d \
 		-p 443:443 \
 		--restart=unless-stopped \
 		-v $(THIS_FILE_DIR)/../source/default.conf:/etc/nginx/conf.d/default.conf \
@@ -32,18 +32,18 @@ run:
 		${IMAGE}
 
 stop:
-	docker stop ${CONTAINER}
+	sudo docker stop ${CONTAINER}
 
 rm: stop
-	docker rm ${CONTAINER}
+	sudo docker rm ${CONTAINER}
 
 package:
-	docker save -o $(THIS_FILE_DIR)/../target/$(TAR) $(IMAGE)
+	sudo docker save -o $(THIS_FILE_DIR)/../target/$(TAR) $(IMAGE)
 	cd $(THIS_FILE_DIR)/.. && tar cfz target/$(PACKAGE) target/$(TAR) docker/Makefile source/
 	rm $(THIS_FILE_DIR)/../target/$(TAR)
 
 load:
-	docker load -i $(THIS_FILE_DIR)/../target/$(TAR)
+	sudo docker load -i $(THIS_FILE_DIR)/../target/$(TAR)
 
 help:
 	$(info Use `make check` to check if environment is ready)

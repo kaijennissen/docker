@@ -1,9 +1,3 @@
-#SUBDIRS := $(wildcard */.)
-SUBDIRS = mlflow jupyter shiny_proxy proxy_reversed
-
-rm_test:
-		make -C jupyter/docker stop
-
 run_all:
 	    -make -C mlflow/docker run
 		-make -C shiny_proxy/docker run
@@ -23,8 +17,8 @@ rm_all:
 		-make -C jupyter/docker rm
 
 pull_all:
-	docker pull statworx/deka_data_science_portal:jupyterhub
-	docker pull statworx/deka_data_science_portal:nginx
-	docker pull statworx/deka_data_science_portal:rstudio
-	docker pull statworx/deka_data_science_portal:mlflow
-	docker pull statworx/deka_data_science_portal:shinyproxy
+	sudo docker pull docker.io/statworx/deka_data_science_portal:jupyterhub
+	sudo docker pull docker.io/statworx/deka_data_science_portal:nginx
+	sudo docker pull docker.io/statworx/deka_data_science_portal:rstudio
+	sudo docker pull docker.io/statworx/deka_data_science_portal:mlflow
+	sudo docker pull docker.io/statworx/deka_data_science_portal:shinyproxy
