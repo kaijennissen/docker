@@ -1,5 +1,6 @@
 IMAGE = statworx/deka_data_science_portal:nginx
-CONTAINER = ds_proxy_reversed
+# nginx:1.17.5
+CONTAINER = ds-proxy-reversed
 NETWORK = data-science-net
 
 REMOTE_FILE_SHARE =
@@ -17,12 +18,15 @@ check:
 	docker-check image ${IMAGE}
 	docker-check network ${NETWORK}
 
+pull:
+	docker pull statworx/deka_data_science_portal:nginx
+
 run:
 	docker run -d \
 		-p 443:443 \
 		--restart=unless-stopped \
-		-v $(THIS_FILE_DIR)/../source/resources/default.conf:/etc/nginx/conf.d/default.conf \
-		-v $(THIS_FILE_DIR)/../source/resources/ssl:/etc/ssl \
+		-v $(THIS_FILE_DIR)/../source/default.conf:/etc/nginx/conf.d/default.conf \
+		-v $(THIS_FILE_DIR)/../source/ssl:/etc/ssl \
 		--name ${CONTAINER} \
 		--net ${NETWORK} \
 		${IMAGE}

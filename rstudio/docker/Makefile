@@ -1,5 +1,6 @@
 IMAGE = statworx/deka_data_science_portal:rstudio
-CONTAINER = ds_app_rstudio
+# rstudio:3.6.1-noauth
+CONTAINER = ds-app-rstudio
 NETWORK = data-science-net
 
 REMOTE_FILE_SHARE =
@@ -21,6 +22,8 @@ build:
 	DOCKER_BUILDKIT=1 docker build -f $(THIS_FILE_DIR)/Dockerfile \
 		-t $(IMAGE) \
 		$(THIS_FILE_DIR)/../source
+
+pull: docker pull statworx/deka_data_science_portal:rstudio
 
 run:
 	docker run -d \

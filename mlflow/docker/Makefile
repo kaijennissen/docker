@@ -1,5 +1,6 @@
 IMAGE = statworx/deka_data_science_portal:mlflow
-CONTAINER = ds_api_mlflow
+# mlflow_api:0.1.0
+CONTAINER = ds-api-mlflow
 NETWORK = data-science-net
 
 REMOTE_FILE_SHARE =
@@ -22,12 +23,17 @@ build:
 		-t $(IMAGE) \
 		$(THIS_FILE_DIR)/../source
 
+pull:
+	docker pull statworx/deka_data_science_portal:mlflow
+
 run:
 	docker run -d \
 		--restart=unless-stopped \
 	    --name $(CONTAINER) \
+		-e SCRIPT_NAME=/mlflow \
 		--net ${NETWORK} \
-	    $(IMAGE)
+		-v $(THIS_FILE_DIR)/../data/mlruns:/mlruns \
+		$(IMAGE)
 
 stop:
 	docker stop ${CONTAINER}

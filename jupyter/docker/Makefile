@@ -1,5 +1,6 @@
 IMAGE = statworx/deka_data_science_portal:jupyterhub
-CONTAINER = ds_proxy_jupyter
+# jupyterhub_proxy:0.1.0
+CONTAINER = ds-proxy-jupyter
 NETWORK = data-science-net
 
 REMOTE_FILE_SHARE =
@@ -22,13 +23,33 @@ build:
 		-t $(IMAGE) \
 		$(THIS_FILE_DIR)/../source
 
+pull:
+	docker pull statworx/deka_data_science_portal:jupyterhub
+
+run_setup:
+	docker run -d \
+	    --name $(CONTAINER) \
+		--net ${NETWORK} \
+	    $(IMAGE)
+	mkdir -p $(THIS_FILE_DIR)/../data/conda/envs
+	docker cp $(CONTAINER):/opt/conda/envs/. $(THIS_FILE_DIR)/../data/conda/envs
+	docker stop $(CONTAINER)
+	docker rm $(CONTAINER)
+
 run:
 	docker run -d \
 		--restart=unless-stopped \
 	    --name $(CONTAINER) \
 		--net ${NETWORK} \
-	    -v $(THIS_FILE_DIR)/../data/user1:/home/user1 \
-        -v $(THIS_FILE_DIR)/../data/user2:/home/user2 \
+		-v $(THIS_FILE_DIR)/../data/conda/envs:/opt/conda/envs \
+	    -v $(THIS_FILE_DIR)/../data/admin:/home/admin \
+        -v $(THIS_FILE_DIR)/../data/Devries:/home/Devries \
+		-v $(THIS_FILE_DIR)/../data/Vittal:/home/Vittal \
+        -v $(THIS_FILE_DIR)/../data/Dieringer:/home/Dieringer \
+		-v $(THIS_FILE_DIR)/../data/Hamami:/home/Hamami \
+        -v $(THIS_FILE_DIR)/../data/Korus:/home/Korus \
+		-v $(THIS_FILE_DIR)/../data/Schmid:/home/Schmid \
+        -v $(THIS_FILE_DIR)/../data/Vogt:/home/Vogt \
 	    $(IMAGE)
 
 stop:

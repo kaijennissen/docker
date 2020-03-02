@@ -15,7 +15,9 @@ RUN apt-get update --fix-missing && \
     texlive-plain-generic \
     texlive-xetex \
     unzip \
-    vim &&\
+    net-tools\
+    netcat \
+    vim && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
@@ -43,6 +45,7 @@ RUN conda install --name tf_env -c conda-forge \
     pandas \
     scipy \
     sympy \
+    mlflow \
     && conda clean -ay
 
 RUN conda install --name tf_env \
@@ -51,11 +54,12 @@ RUN conda install --name tf_env \
 COPY ./jupyterhub_config.py /etc/jupyterhub/
 
 COPY ./user.sh /
-RUN chmod +x /user.sh && /user.sh
+RUN chmod +x /user.sh 
+# && /user.sh
 
 EXPOSE 8000
 
-SHELL ["conda", "run", "-n", "tf_env", "/bin/bash", "-c"]
+# SHELL ["conda", "run", "-n", "tf_env", "/bin/bash", "-c"]
 COPY ./startup.sh /
 RUN chmod +x /startup.sh
 ENTRYPOINT ["conda", "run", "-n", "tf_env", "/bin/bash", "startup.sh"]

@@ -6,5 +6,11 @@
 *.tar.gz
 
 # data folders
-jupyter/data/
-rstudio/data/
+data_science_proxy/jupyter/data/       
+data_science_proxy/rstudio/data/  
+data_science_proxy/mlflow/data/ 
+
+jupyter/data/       
+rstudio/data/  
+mlflow/data/  
+

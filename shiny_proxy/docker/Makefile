@@ -1,5 +1,6 @@
 IMAGE = statworx/deka_data_science_portal:shinyproxy
-CONTAINER = ds_proxy_rstudio
+# registry.statworx/shinyproxy:2.3-mlflow
+CONTAINER = ds-proxy-rstudio
 NETWORK = data-science-net
 
 REMOTE_FILE_SHARE =
@@ -17,10 +18,13 @@ check:
 	docker-check image ${IMAGE}
 	docker-check network ${NETWORK}
 
-build:
-	DOCKER_BUILDKIT=1 docker build -f $(THIS_FILE_DIR)/Dockerfile \
-		-t $(IMAGE) \
-		$(THIS_FILE_DIR)/../source
+# build:
+# 	DOCKER_BUILDKIT=1 docker build -f $(THIS_FILE_DIR)/Dockerfile \
+# 		-t $(IMAGE) \
+# 		$(THIS_FILE_DIR)/../source
+
+pull:
+	docker pull statworx/deka_data_science_portal:shinyproxy
 
 run:
 	docker run -d \
