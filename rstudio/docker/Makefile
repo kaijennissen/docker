@@ -23,7 +23,8 @@ build:
 		-t $(IMAGE) \
 		$(THIS_FILE_DIR)/../source
 
-pull: sudo docker pull statworx/deka_data_science_portal:rstudio
+pull:
+	sudo docker pull statworx/deka_data_science_portal:rstudio
 
 run:
 	sudo docker run -d \

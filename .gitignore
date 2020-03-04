@@ -13,4 +13,4 @@ data_science_proxy/mlflow/data/
 jupyter/data/       
 rstudio/data/  
 mlflow/data/  
-
+artifacts/

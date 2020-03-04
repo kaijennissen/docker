@@ -41,15 +41,17 @@ run:
 		--restart=unless-stopped \
 	    --name $(CONTAINER) \
 		--net ${NETWORK} \
+		-v $(THIS_FILE_DIR)/../../artifacts:/artifacts \
+		-v $(THIS_FILE_DIR)/../source/user.sh:/user.sh \
 		-v $(THIS_FILE_DIR)/../data/conda/envs:/opt/conda/envs \
-	    -v $(THIS_FILE_DIR)/../data/admin:/home/admin \
-        -v $(THIS_FILE_DIR)/../data/Devries:/home/Devries \
-		-v $(THIS_FILE_DIR)/../data/Vittal:/home/Vittal \
-        -v $(THIS_FILE_DIR)/../data/Dieringer:/home/Dieringer \
-		-v $(THIS_FILE_DIR)/../data/Hamami:/home/Hamami \
-        -v $(THIS_FILE_DIR)/../data/Korus:/home/Korus \
-		-v $(THIS_FILE_DIR)/../data/Schmid:/home/Schmid \
-        -v $(THIS_FILE_DIR)/../data/Vogt:/home/Vogt \
+		-v $(THIS_FILE_DIR)/../data/admin:/home/admin \
+        -v $(THIS_FILE_DIR)/../data/devries:/home/devries \
+		-v $(THIS_FILE_DIR)/../data/vittal:/home/vittal \
+        -v $(THIS_FILE_DIR)/../data/dieringer:/home/dieringer \
+		-v $(THIS_FILE_DIR)/../data/hamami:/home/hamami \
+        -v $(THIS_FILE_DIR)/../data/korus:/home/korus \
+		-v $(THIS_FILE_DIR)/../data/schmid:/home/schmid \
+        -v $(THIS_FILE_DIR)/../data/vogt:/home/vogt \
 	    $(IMAGE)
 
 stop:

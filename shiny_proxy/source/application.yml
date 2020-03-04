@@ -8,26 +8,26 @@ proxy:
   - name: admin
     password: password
     groups: admins
-  - name: Devries
+  - name: devries
     password: password
     groups: admins
   # users
-  - name: Vittal
+  - name: vittal
     password: password
     groups: users
-  - name: Dieringer
+  - name: dieringer
     password: password
     groups: users
-  - name: Hamami
+  - name: hamami
     password: password
     groups: users
-  - name: Korus
+  - name: korus
     password: password
     groups: users
-  - name: Schmid
+  - name: schmid
     password: password
     groups: users
-  - name: Vogt
+  - name: vogt
     password: password
     groups: users
 
@@ -39,7 +39,7 @@ proxy:
     description: Start RStudio Server Instance
     container-image: statworx/deka_data_science_portal:rstudio
     # rstudio:3.6.1-noauth
-    container-volumes: ["/Users/kaijennissen/Projekte/2019/05_DEKA/DEKA-ML/04_Docker/intern-registry-images/data_science_proxy/rstudio/data/#{proxy.userId}:/home/#{proxy.userId}"]
+    container-volumes: ["/Users/kaijennissen/Intern/05_Projekte/docker/rstudio/data/#{proxy.userId}:/home/#{proxy.userId}", "/Users/kaijennissen/Intern/05_Projekte/docker/artifacts:/artifacts"]
     container-network: data-science-net
     access-groups: [users, admins]
     container-env:

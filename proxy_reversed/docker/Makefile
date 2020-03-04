@@ -23,7 +23,7 @@ pull:
 
 run:
 	sudo docker run -d \
-		-p 443:443 \
+		-p 4430:443 \
 		--restart=unless-stopped \
 		-v $(THIS_FILE_DIR)/../source/default.conf:/etc/nginx/conf.d/default.conf \
 		-v $(THIS_FILE_DIR)/../source/ssl:/etc/ssl \

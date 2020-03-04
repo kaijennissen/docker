@@ -32,6 +32,7 @@ run:
 	    --name $(CONTAINER) \
 		-e SCRIPT_NAME=/mlflow \
 		--net ${NETWORK} \
+		-v $(THIS_FILE_DIR)/../../artifacts:/artifacts \
 		-v $(THIS_FILE_DIR)/../data/mlruns:/mlruns \
 		$(IMAGE)
 
@@ -42,7 +43,7 @@ rm: stop
 	sudo docker rm ${CONTAINER}
 
 package:
-	sudo docker save -o $(THIS_FILE_DIR)/../target/$(TAR) $(IMAGE)
+	docker save -o $(THIS_FILE_DIR)/../target/$(TAR) $(IMAGE)
 	cd $(THIS_FILE_DIR)/.. && tar cfz target/$(PACKAGE) target/$(TAR) docker/Makefile  source/
 	rm $(THIS_FILE_DIR)/../target/$(TAR)
 

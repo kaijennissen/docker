@@ -55,11 +55,9 @@ COPY ./jupyterhub_config.py /etc/jupyterhub/
 
 COPY ./user.sh /
 RUN chmod +x /user.sh 
-# && /user.sh
 
 EXPOSE 8000
 
-# SHELL ["conda", "run", "-n", "tf_env", "/bin/bash", "-c"]
 COPY ./startup.sh /
 RUN chmod +x /startup.sh
 ENTRYPOINT ["conda", "run", "-n", "tf_env", "/bin/bash", "startup.sh"]

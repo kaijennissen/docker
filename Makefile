@@ -1,3 +1,12 @@
+pull_all:
+	sudo docker pull docker.io/statworx/deka_data_science_portal:jupyterhub
+	sudo docker pull docker.io/statworx/deka_data_science_portal:nginx
+	sudo docker pull docker.io/statworx/deka_data_science_portal:rstudio
+	sudo docker pull docker.io/statworx/deka_data_science_portal:mlflow
+	sudo docker pull docker.io/statworx/deka_data_science_portal:shinyproxy
+run_setup:
+	-make -C jupyter/docker run_setup 
+
 run_all:
 	    -make -C mlflow/docker run
 		-make -C shiny_proxy/docker run
@@ -16,9 +25,3 @@ rm_all:
 		-make -C proxy_reversed/docker rm
 		-make -C jupyter/docker rm
 
-pull_all:
-	sudo docker pull docker.io/statworx/deka_data_science_portal:jupyterhub
-	sudo docker pull docker.io/statworx/deka_data_science_portal:nginx
-	sudo docker pull docker.io/statworx/deka_data_science_portal:rstudio
-	sudo docker pull docker.io/statworx/deka_data_science_portal:mlflow
-	sudo docker pull docker.io/statworx/deka_data_science_portal:shinyproxy

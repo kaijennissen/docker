@@ -1,6 +1,6 @@
 FROM rocker/tidyverse:3.6.1
 
-RUN R -e "install.packages(c('mlflow', 'caret'), repos = 'http://cran.rstudio.com/')"
+RUN R -e "install.packages(c('mlflow', 'caret', 'reticulate'), repos = 'http://cran.rstudio.com/')"
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
@@ -33,4 +33,3 @@ RUN pip install mlflow>=1.0 \
                         && pip install cloudpickle
 
 RUN echo "www-frame-origin=same" >> /etc/rstudio/disable_auth_rserver.conf
-
